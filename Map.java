@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.swing.*;
+import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * An abstract class representing a basic overworld map.
@@ -56,22 +57,24 @@ public abstract class Map extends JPanel{
     /**
      * Instantiates the player at a location specified by the subclass
      */
-    public void createPlayer();
+    public void createPlayer(){
+        player = new Player(0,0);
+    }
 
     public void addEntity(Entity e){
         entities.add(e);
     }
 
     //passes the player a move command when an arrow is pressed
-    private ActionListener panelAction = new ActionListener{
+    private ActionListener panelAction = new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
             String command = (String) e.getActionCommand();
-            player.move(e);
+            player.move((String) e.getActionCommand());
 
             repaint();
         }
-    }
+    };
 
     @Override
     public Dimension getPreferredSize(){
@@ -84,14 +87,16 @@ public abstract class Map extends JPanel{
      * screw up, will run every game tick.
      */
     @Override
-    public void paintComponents(Graphics g){
+    public void paintComponent(Graphics g){
         super.paintComponent(g);
         for(Entity e : this.entities){
             e.update();
-            g.drawImage(e.getAnimation().getSprite(), e.getX, e.getY, null);
+            if(e.intersects(player))
+                e.collide(player);
+            g.drawImage(e.getAnimation().getSprite(), e.getX(), e.getY(), null);
         }
         player.update();
-        g.drawImage(player.getAnimation().getSprite(),player.getX,player.getY,null);
+        g.drawImage(player.getAnimation().getSprite(),player.getX(),player.getY(),null);
 
     }
 }

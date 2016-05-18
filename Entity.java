@@ -1,5 +1,6 @@
-import java.awt.Image.BufferedImage;
+import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 /**
  * An abstract class that represents any object which can be interacted
@@ -48,20 +49,22 @@ public abstract class Entity{
         this.y = y;
         region = new Rectangle(x, y, xDim, yDim);
         
+        this.moves = new ArrayList<Animation>();
+
         for(BufferedImage[] biArray : moves)
-            this.moves.add(new Animation(biArray,20);
+            this.moves.add(new Animation(biArray,20));
         this.animation = this.moves.get(0);
     }
     
     /**
      * A method to update the position and animation of this Entity.
      */
-    public void move();
+    public abstract void move();
 
     /**
      * Handles the collision between two entities
      */
-    public void collide(Entity other);
+    public abstract void collide(Entity other);
 
     public int getX(){
         return this.x;
@@ -90,7 +93,7 @@ public abstract class Entity{
         this.animation.update();
     }
 
-    public void getAnimation(){
+    public Animation getAnimation(){
         return this.animation;
     }
 
@@ -129,5 +132,6 @@ public abstract class Entity{
     public int getHeight(){
         return region.height;
     }
+
 }
 

@@ -19,6 +19,7 @@ public class Sprite{
             e.printStackTrace();
         }
 
+        spriteSheet = sprite;
         return sprite;
     }
     

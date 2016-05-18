@@ -11,14 +11,8 @@ public class GameFrame extends JFrame{
 
     public GameFrame(){
         final Map MAP_0_0 = new Map0_0();
-
-        this.setContentPane(map0_0);
         
-        new Timer(16, new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                panel.repaint();
-            }
-        }).start();
+        runMap_0_0();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("We're doing it boys");
@@ -26,12 +20,24 @@ public class GameFrame extends JFrame{
         setVisible(true);
     }
 
+    public void runMap_0_0(){
+        final Map MAP_0_0 = new Map0_0();
+
+        this.setContentPane(MAP_0_0);
+        new Timer(16, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                MAP_0_0.repaint();
+            }
+        }).start();
+
+    }
     public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
                 new GameFrame();
             }
-        }
+        });
     }
 }

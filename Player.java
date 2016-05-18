@@ -1,4 +1,5 @@
-import java.awt.Image.BufferedImage;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * A class representing the player character; barebones implementation
@@ -8,10 +9,10 @@ import java.awt.Image.BufferedImage;
 
 public class Player extends Entity{
     //you don't need to remember animation indecies if you do this
-    private final int STAND = 0, UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4;
+    private static final int STAND = 0, UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4;
     
     //the side length of our player's sprite in pixels
-    private final int SIZE = 32;
+    private static final int SIZE = 32;
 
     /**
     * The constructor for Player; assembles the player using the preset
@@ -22,7 +23,7 @@ public class Player extends Entity{
     *  The starting y-coordinate of the player
     */
     public Player(int x, int y){
-        super(loadAnims,x,y,SIZE,SIZE);
+        super(loadAnims(),x,y,SIZE,SIZE);
     }
 
     /**
@@ -30,7 +31,7 @@ public class Player extends Entity{
      * overloaded constructor, but uses default coordinates of (0,0)
      */
     public Player(){
-       super(loadAnims,0,0,SIZE,SIZE);
+       super(loadAnims(),0,0,SIZE,SIZE);
     }
     
     /**
@@ -48,9 +49,9 @@ public class Player extends Entity{
              {Sprite.getSprite(0, 1), Sprite.getSprite(1, 1), Sprite.getSprite(2, 1)};
         BufferedImage[] walkingRight =
              {Sprite.getSprite(0, 2), Sprite.getSprite(1, 2), Sprite.getSprite(2, 2)};
-        BufferedImage[] walkingUp =
-             {Sprite.getSprite(0, 0), Sprite.getSprite(1, 0), Sprite.getSprite(2, 0)};
         BufferedImage[] walkingDown =
+             {Sprite.getSprite(0, 0), Sprite.getSprite(1, 0), Sprite.getSprite(2, 0)};
+        BufferedImage[] walkingUp =
              {Sprite.getSprite(0, 3), Sprite.getSprite(1, 3), Sprite.getSprite(2, 3)};
         BufferedImage[] standing =
              {Sprite.getSprite(1,0)};
@@ -91,26 +92,28 @@ public class Player extends Entity{
     }
 
     public void collide(Entity other){
-        if(other instanceof Enemy){
-            //combat panel to be implemented
-        }
-        else if(other instanceof Enviro){
-            //colliding from left -> right
-            while(this.getX() + this.getWidth() > other.getX()
-                && this.getX() + this.getWidth() < other.getX() + other.getWidth())
-                this.changePosition(-1,0);
-            //colliding from right -> left
-            while(this.getX() < other.getX() + other.getWidth()
-                && this.getX() > other.getX())
-                this.changePosition(1,0);
-            //colliding from top -> bottom
-            while(this.getY() + this.getHeight() > other.getY()
-                && this.getY() + this.getHeight() < other.getY() + other.getHeight())
-                this.changePosition(0,-1);
-            //colliding from bottom -> top
-            while(this.getY() < other.getY() + other.getHeight()
-                && this.getY > other.getY())
-                this.changePosition(0,1);
+     //   if(other instanceof Enemy){
+     //       //combat panel to be implemented
+     //   } else
+        if(other instanceof Enviro){
+            boolean adjX = Math.abs(this.getX() - other.getX())
+                >= Math.abs(this.getY() - other.getY());
+            int adj = 0;
+            if(adjX){
+                if(this.getX() > other.getX())
+                    adj = 1;
+                else
+                    adj = -1;
+                while(this.intersects(other))
+                    changePosition(adj,0);
+            } else {
+                if(this.getY() > other.getY())
+                    adj = 1;
+                else
+                    adj = -1;
+                while(this.intersects(other))
+                    changePosition(0,adj);
+            }
         }
     }
 }
