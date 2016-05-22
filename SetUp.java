@@ -43,7 +43,9 @@ public class SetUp {
 		
 		//Creates player1
 		Player player1 = new Player(speed, luck, mana, strength, name);
+		player1.setName(name);
 		player1.Des();
+		Player.locationCanGo[0] = true;
 		return player1;
 	}
 

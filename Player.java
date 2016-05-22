@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+
 import javax.swing.JOptionPane;
 
 public class Player extends Organisms {
@@ -12,20 +14,40 @@ public class Player extends Organisms {
 		name = n;
 		level = 1;
 		xp = 0;
+		currentLocation = 1;
+		gold = 10;
+		for(int i = 0; i<8; i++){
+			locationCanGo[i] = false;
+		}
 	}
 
 	//Instance
+	public static Boolean[] locationCanGo = new Boolean[8];
 	private int luck;
 	private int mana;
 	private int strength;
 	private int level;
 	private int xp;
 	private String name;
+	private int gold;
+	private int currentLocation;
+	
+	//Index, Name, Places it can go to
+	//1 Pub (2)
+	//2 Trail (1, 8, 6,)
+	//3 Mines (6)
+	//4 Ocean (8)
+	//5 Dungeon (6, 7)
+	//6 Mountains (2, 3, 5)
+	//7 Alter (Dungeon level 20)
+	//8 dock (2, 4)
+	
+	
 	
 	
 	//Methods
 	public void Des(){
-		JOptionPane.showMessageDialog(null, name + " has the following stats: "+ "\nlevel:" + level  + "\nHealth:" + super.getHealth() + "\nSpeed:" + super.getspeed() + "\nMana:" + mana + "\nLuck:" + luck + "\nStrength:" + strength  , name = " stats", 1, null);
+		JOptionPane.showMessageDialog(null, name + " has the following stats: "+ "\nlevel:" + level  + "\nMax health:" + super.getHealth() + "\nCurrent health:" + super.getCurrentHealth() + "\nSpeed:" + super.getspeed() + "\nMana:" + mana + "\nLuck:" + luck + "\nStrength:" + strength  , "Stats", 1, null);
 	}
 	
 	//Needs to find what the scaling should be. Current Values are guessed not balanced
@@ -65,6 +87,7 @@ public class Player extends Organisms {
 				luck+= luckNew;
 				mana += manaNew;
 				strength =+ strengthNew;
+				super.setHealth(super.getHealth() + 20);
 				super.setspeed(speedNew);
 			}
 		}
@@ -84,6 +107,24 @@ public class Player extends Organisms {
 	
 	public void setName(String n){
 		name = n;
+	}
+	
+	public int getGold(){
+		return(gold);
+	}
+	public void setGold(int i){
+		gold +=i;
+	}
+
+	public void setCurrentLocation(int i){
+		currentLocation = i;
+	}
+	public int getCurrentLocation(){
+		return(currentLocation);
+	}
+	
+	public int getLuck(){
+		return luck;
 	}
 	
 }

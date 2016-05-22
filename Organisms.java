@@ -7,10 +7,12 @@ public class Organisms  {
 		health = h;
 		resistance = r;
 		speed = s;
+		currentHealth = h;
 	}
 	
 	//Instance Data
 	private int health;
+	private int currentHealth;
 	private int resistance;
 	private int speed;
 
@@ -20,6 +22,12 @@ public class Organisms  {
 	}
 	public void setHealth(int i){
 		health += i;
+	}
+	public int getCurrentHealth(){
+		return(currentHealth);
+	}
+	public void setCurrentHealth(int i){
+		currentHealth += i;
 	}
 	public int getResistance(){
 		return(resistance);
