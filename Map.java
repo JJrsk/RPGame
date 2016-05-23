@@ -21,10 +21,19 @@ public abstract class Map extends JPanel{
     /**
      * A list of the basic executable movement commands for the player
      * to use; released is the command key triggered when an arrow key
-     * is released and signals to stop the player's animation.
+     * is released and signals to stop the player's animation; directions
+     * are simply for ease of use in getExitDirection.
      */
     private final String[] commands = {"UP","DOWN","LEFT","RIGHT"};
     private final String released = "KEY RELEASED";
+
+    public static final int UP = 0;
+    public static final int DOWN = 1;
+    public static final int LEFT = 2;
+    public static final int RIGHT = 3;
+
+    //THE KLUDGY WORKAROUND TO END ALL KLUDGY WORKAROUNDS
+    public boolean runMe;
 
     public Map(){
         entities = new ArrayList<Entity>();
@@ -51,18 +60,80 @@ public abstract class Map extends JPanel{
 
         //you technically aren't supposed to use registerKeyboardAction
         //but the alternative requires a lot more coding for no good reason
-        createPlayer();
     }
 
     /**
-     * Instantiates the player at a location specified by the subclass
+     * Creates the player at a default location; called when a new
+     * Player must be constructed.
      */
     public void createPlayer(){
-        player = new Player(0,0);
+        player = new Player(160,120);
+    }
+
+    /**
+     * Creates the player using a specified "from" direction, ie the
+     * direction of the map that sent this player.
+     */
+    public void createPlayer(int from,Player p){
+        if(p == null){
+            createPlayer();
+            return;
+        }
+
+        switch(from){
+            case UP:
+                this.player = new Player(p.getX(),0);
+                break;
+            case DOWN:
+                this.player = new Player(p.getX(),this.getHeight() - p.getHeight());
+                break;
+            case LEFT:
+                this.player = new Player(0,p.getY());
+                break;
+            case RIGHT:
+                this.player = new Player(this.getWidth() - p.getWidth(), p.getY());
+                break;
+            default:
+                createPlayer();
+        }
     }
 
     public void addEntity(Entity e){
         entities.add(e);
+    }
+    
+    /**
+     * Used to determine whether this version of the map should keep
+     * running in the driver class.
+     * @return true if the player is still inside the map
+     *      false otherwise
+     */
+    public boolean keepGoing(){
+        return player.getRegion().intersects(this.getBounds());
+    }
+
+    /**
+     * Determines from which direction the player is leaving this map.
+     */
+    public int getExitDirection(){
+        if(player.getX() < 0)
+            return LEFT;
+        if(player.getX() + player.getWidth() >= this.getWidth())
+            return RIGHT;
+        if(player.getY() < 0)
+            return UP;
+        if(player.getY() + player.getHeight() >= this.getHeight())
+            return DOWN;
+
+        return -1;
+    }
+
+    /**
+     * Returns the player; used for updating the map while preserving
+     * the player's state
+     */
+    public Player getPlayer(){
+        return player;
     }
 
     //passes the player a move command when an arrow is pressed
@@ -75,6 +146,12 @@ public abstract class Map extends JPanel{
             repaint();
         }
     };
+
+    public void runMap(GameFrameRedo g, int from, Player p){
+        g.setContentPane(this);
+        this.createPlayer(from, p);
+
+    }
 
     @Override
     public Dimension getPreferredSize(){

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Player extends Entity{
     //you don't need to remember animation indecies if you do this
-    private static final int STAND = 0, UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4;
+    private static final int STAND = 4, UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3;
     
     //the side length of our player's sprite in pixels
     private static final int SIZE = 32;
@@ -24,6 +24,7 @@ public class Player extends Entity{
     */
     public Player(int x, int y){
         super(loadAnims(),x,y,SIZE,SIZE);
+        changeAnimation(STAND);
     }
 
     /**
@@ -31,7 +32,8 @@ public class Player extends Entity{
      * overloaded constructor, but uses default coordinates of (0,0)
      */
     public Player(){
-       super(loadAnims(),0,0,SIZE,SIZE);
+        super(loadAnims(),0,0,SIZE,SIZE);
+        changeAnimation(STAND);
     }
     
     /**
@@ -43,7 +45,7 @@ public class Player extends Entity{
      */
     private static ArrayList<BufferedImage[]> loadAnims(){
         ArrayList<BufferedImage[]> imgs = new ArrayList<BufferedImage[]>();
-        Sprite.loadSprite("PlayerSpriteSheet.png");
+        Sprite.loadSprite("PlayerSpriteSheet.png",SIZE,SIZE);
         
         BufferedImage[] walkingLeft =
              {Sprite.getSprite(0, 1), Sprite.getSprite(1, 1), Sprite.getSprite(2, 1)};
@@ -55,11 +57,12 @@ public class Player extends Entity{
              {Sprite.getSprite(0, 3), Sprite.getSprite(1, 3), Sprite.getSprite(2, 3)};
         BufferedImage[] standing =
              {Sprite.getSprite(1,0)};
-        imgs.add(standing);
         imgs.add(walkingUp);
         imgs.add(walkingDown);
         imgs.add(walkingLeft);
         imgs.add(walkingRight);
+        imgs.add(standing);
+
         return imgs;
      }
     
@@ -76,26 +79,25 @@ public class Player extends Entity{
     public void move(String command){
         if(command.equals("UP")){
             changeAnimation(UP);
-            changePosition(0,-5);
+            changePosition(0,-8);
         } else if(command.equals("DOWN")){
             changeAnimation(DOWN);
-            changePosition(0,5);
+            changePosition(0,8);
         } else if(command.equals("LEFT")){
             changeAnimation(LEFT);
-            changePosition(-5,0);
+            changePosition(-8,0);
         } else if(command.equals("RIGHT")){
             changeAnimation(RIGHT);
-            changePosition(5,0);
+            changePosition(8,0);
         } else if(command.equals("KEY RELEASED")){
             resetAnimation();
         }
     }
 
     public void collide(Entity other){
-     //   if(other instanceof Enemy){
-     //       //combat panel to be implemented
-     //   } else
-        if(other instanceof Enviro){
+        if(other instanceof Enemy){
+            //combat panel to be implemented
+        } else if(other instanceof Enviro){
             boolean adjX = Math.abs(this.getX() - other.getX())
                 >= Math.abs(this.getY() - other.getY());
             int adj = 0;

@@ -1,6 +1,13 @@
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+* A class managing the operations necessary in animating
+* an array of BufferedImages
+* @author Savlon from gamedev.stackexchange.com
+* Class has been modified from its original form in order
+* to better suit our needs.
+*/
 public class Animation{
     
     private int frameCount;
@@ -15,7 +22,7 @@ public class Animation{
 
     public Animation(BufferedImage[] frames, int frameDelay){
         this.frameDelay = frameDelay;
-        this.stopped = true;
+        this.stopped = false;
 
         for(BufferedImage i : frames)
             addFrame(i, frameDelay);

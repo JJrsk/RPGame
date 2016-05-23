@@ -1,5 +1,10 @@
 import java.awt.image.BufferedImage;
 
+/**
+* A class managing the operations necessary in loading
+* and retrieving animation frames from a spritesheet
+* @author Savlon from gamedev.stackexchange.com
+*/
 public class Frame {
 
     private BufferedImage frame;

@@ -25,8 +25,10 @@ public abstract class Entity{
     /**
      * An arraylist that holds all the necessary movement animations for an
      * Entity, assembled in the constructor.
-     * Make sure moves.get(0) is standing, 1 is moving up, 2 is down, 3 is
-     * left, and 4 is right
+     * The convention as of now is to make moves.get(0) be the default for
+     * stationary objects; for all others, 0 is moving up, 1 is moving down,
+     * 2 is moving left, 3 is moving right, and 4 is standing, with other 
+     * animations TBD
      */
     private ArrayList<Animation> moves;
 
