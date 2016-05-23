@@ -22,7 +22,7 @@ public class SetUp {
 		JOptionPane.showMessageDialog(null, "Next you will distribute your stat points. You have 20 points to give to\nSpeed, Luck, Mana, and Strength. Each stat has a base of 5." , "Stats", 1, null);
 	
 		//Makes sure all points are used
-		while(luck + mana+ strength + speed != 20){
+		while(luck + mana+ strength + speed != 20  && luck >=0 && mana >= 0 && strength >=0 && speed>=0){
 			if(luck + mana + strength + speed > 0 ){
 				JOptionPane.showMessageDialog(null, "Please follow the guidelines and hit exactly 20 points used", "Stats", 1, null);
 				luck = 0;

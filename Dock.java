@@ -26,6 +26,7 @@ public class Dock {
 				JOptionPane.showMessageDialog(null, "You rent a boat from a man at the docks.");
 				if(player1.getGold()>=2){
 					JOptionPane.showMessageDialog(null, "You have been charged 2 gold");
+					player1.setGold(-2);
 				}else{
 					JOptionPane.showMessageDialog(null, "Seeing your low economic state, the man gives you the boat for free!");
 				}

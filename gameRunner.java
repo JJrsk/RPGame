@@ -14,8 +14,8 @@ public class gameRunner {
 				ThirteenGUIRunner.runGame();
 				if(Dock.canFindCecil){
 					JOptionPane.showMessageDialog(null, "After playing a game a hooded figure approaches.");
-					JOptionPane.showMessageDialog(null, "You've done the task, in the pace with flasks, now you need to say the key. Go to the docks, and to undo the locks, by saying the code word:", "Random Captain", 1, null);
-					JOptionPane.showMessageDialog(null, "Before the  figure can tell you the key, a bar fight erupts! Better get going before you get yourself in trouble.\nMaybe there's a clue to the key around the docks or ocean.");
+					JOptionPane.showMessageDialog(null, "You've done the task, in the pace with flasks, now you need to say the key.\nGo to the docks, and to undo the locks, by saying the code word:", "Random Captain", 1, null);
+					JOptionPane.showMessageDialog(null, "Before the figure can tell you the key, a bar fight erupts! Better get going before you get yourself in trouble.\nMaybe there's a clue to the key around the docks or ocean.");
 					Player.locationCanGo[3] = true;
 				}
 			}else if(choice == 2){
