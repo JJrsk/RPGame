@@ -196,4 +196,8 @@ public class Player extends Entity{
 	public void levelUp(){
 		player1.levelUp();
 	}
+
+        public PlayerData getPlayerData(){
+            return player1;
+        }
 }

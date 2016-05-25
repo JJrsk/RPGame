@@ -82,16 +82,16 @@ public abstract class Map extends JPanel{
 
         switch(from){
             case UP:
-                this.player = new Player(p.getX(),0);
+                this.player = new Player(p.getX(),0,p.getPlayerData());
                 break;
             case DOWN:
-                this.player = new Player(p.getX(),this.getHeight() - p.getHeight());
+                this.player = new Player(p.getX(),this.getHeight() - p.getHeight(),p.getPlayerData());
                 break;
             case LEFT:
-                this.player = new Player(0,p.getY());
+                this.player = new Player(0,p.getY(),p.getPlayerData());
                 break;
             case RIGHT:
-                this.player = new Player(this.getWidth() - p.getWidth(), p.getY());
+                this.player = new Player(this.getWidth() - p.getWidth(), p.getY(),p.getPlayerData());
                 break;
             default:
                 createPlayer();
