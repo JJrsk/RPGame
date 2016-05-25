@@ -3,13 +3,11 @@
 public class Organisms  {
 	
 	//Constructor
-	public Organisms(int h, int r, int s, int aL, int aH){
+	public Organisms(int h, int r, int s){
 		health = h;
 		resistance = r;
 		speed = s;
 		currentHealth = h;
-		attackLow = aL;
-		attackHigh = aH;
 	}
 	
 	//Instance Data
@@ -17,8 +15,6 @@ public class Organisms  {
 	private int currentHealth;
 	private int resistance;
 	private int speed;
-	private int attackLow;
-	private int attackHigh;
 
 	//Methods
 	public int getHealth(){

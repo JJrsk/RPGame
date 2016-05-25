@@ -67,14 +67,14 @@ public abstract class Map extends JPanel{
      * Player must be constructed.
      */
     public void createPlayer(){
-        player = new Player(160,120);
+        player = new Player(160,120, SetUp.player12);
     }
 
     /**
      * Creates the player using a specified "from" direction, ie the
      * direction of the map that sent this player.
      */
-    public void createPlayer(int from,Player p){
+    public void createPlayer(int from, Player p){
         if(p == null){
             createPlayer();
             return;

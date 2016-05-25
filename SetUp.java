@@ -9,6 +9,7 @@ public class SetUp {
 	public static int strength = 0;
 	public static int speed = 0;
 	public static String name;
+	public static PlayerData player12;
 	
 	//Sets up the player
 	public static Player run(){
@@ -22,7 +23,7 @@ public class SetUp {
 		JOptionPane.showMessageDialog(null, "Next you will distribute your stat points. You have 20 points to give to\nSpeed, Luck, Mana, and Strength. Each stat has a base of 5." , "Stats", 1, null);
 	
 		//Makes sure all points are used
-		while(luck + mana+ strength + speed != 20  && luck >=0 && mana >= 0 && strength >=0 && speed>=0){
+		while(luck + mana+ strength + speed != 20){
 			if(luck + mana + strength + speed > 0 ){
 				JOptionPane.showMessageDialog(null, "Please follow the guidelines and hit exactly 20 points used", "Stats", 1, null);
 				luck = 0;
@@ -42,7 +43,8 @@ public class SetUp {
 		}
 		
 		//Creates player1
-		Player player1 = new Player(speed, luck, mana, strength, name);
+		player12 = new PlayerData(speed, luck, mana, strength, name);
+		Player player1 = new Player(0,0, player12);
 		player1.setName(name);
 		player1.Des();
 		Player.locationCanGo[0] = true;
