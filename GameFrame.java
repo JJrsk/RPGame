@@ -9,20 +9,36 @@ import javax.swing.*;
 
 public class GameFrame extends JFrame{
 
-    private static final Map MAP_0_0 = new Map0_0();
-    private static final Map MAP_1_0 = new Map1_0();
 
-    public GameFrame(){
+    public GameFrame(Map m){
 
-        runMap_0_0(-1, null);
+        runMap(m.getPlayer(),m);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("We're doing it boys");
-        setSize(640,480);
+        setSize(1280,960);
         setVisible(true);
     }
 
-    public void runMap_0_0(int from, Player p){
+    public void runMap(Player p,final Map m){
+        this.setContentPane(m);
+        m.createPlayer(p, 128, 64);
+
+        new Timer(16, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(m.keepGoing())
+                    m.repaint();
+                else{
+                    m.getExitLocation().run();
+                    GameFrame.this.setVisible(false);
+                    GameFrame.this.dispose();
+                }
+            }
+        }).start();
+
+    }
+/*    public void runMap_0_0(int from, Player p){
        this.setContentPane(MAP_0_0);
        MAP_0_0.createPlayer(from, p);
 
@@ -96,13 +112,13 @@ public class GameFrame extends JFrame{
 
             }
         }).start();
-    }
+    }*/
 
     public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
-                new GameFrame();
+                new GameFrame(new Map0_0());
             }
         });
     }

@@ -33,6 +33,7 @@ public abstract class Map extends JPanel{
     public static final int RIGHT = 3;
 
     //THE KLUDGY WORKAROUND TO END ALL KLUDGY WORKAROUNDS
+    //CURRENTLY UNUSED BUT ONE DAY WE MAY NEED ITS TERRIBLENESS
     public boolean runMe;
 
     public Map(){
@@ -98,6 +99,10 @@ public abstract class Map extends JPanel{
         }
     }
 
+    public void createPlayer(Player p, int x, int y){
+        this.player = new Player(x,y,p.getPlayerData());
+    }
+
     public void addEntity(Entity e){
         entities.add(e);
     }
@@ -147,12 +152,6 @@ public abstract class Map extends JPanel{
         }
     };
 
-    public void runMap(GameFrameRedo g, int from, Player p){
-        g.setContentPane(this);
-        this.createPlayer(from, p);
-
-    }
-
     @Override
     public Dimension getPreferredSize(){
         return (new Dimension(600,400));
@@ -176,4 +175,6 @@ public abstract class Map extends JPanel{
         g.drawImage(player.getAnimation().getSprite(),player.getX(),player.getY(),null);
 
     }
+
+    public abstract Location getExitLocation();
 }
