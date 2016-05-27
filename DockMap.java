@@ -7,13 +7,20 @@ import java.awt.image.BufferedImage;
  * Probably where the first enemy will go
  */
 
-public class Map1_0 extends Map{
+public class DockMap extends Map{
 
-    public Map1_0(){
+    public DockMap(){
         super();
         Sprite.loadSprite("Willy in the Raw copy.png",128,128);
         BufferedImage[] bi = {Sprite.getSprite(0,0)};
         addEntity(new Enviro(bi,120,40));
+    }
+
+    public Location getExitLocation(){
+    	if(this.getPlayer().getX() < 0)
+    		return new Trail();
+    	else
+    		return null;
     }
 
 

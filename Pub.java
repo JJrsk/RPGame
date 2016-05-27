@@ -2,12 +2,13 @@ import javax.swing.JOptionPane;
 
 //pub class done
 
-public class Pub {
+public class Pub implements Location{
 
 	public static int firstRun = 1;
 	public static int option;
 	public static int option2;
-	public static Player run(Player player1){
+	
+	public Player run(Player player1){
 		if(firstRun == 1){
 			player1 = welcome(player1);
 		}else{
@@ -18,7 +19,7 @@ public class Pub {
 		return (player1);
 	}
 	
-	public static Player enterance(Player player1){
+	public Player enterance(Player player1){
 		int i = 0;
 		
 		option = Integer.parseInt(JOptionPane.showInputDialog("Hey! What do you want to do?\n1. Look at quests\n2. Buy a drink\n3. Rent a room\n4. See your stats\n5. Play a game\n6. Leave"));

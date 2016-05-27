@@ -1,13 +1,13 @@
 import javax.swing.JOptionPane;
 
 
-public class Dock {
+public class Dock implements Location{
 
 	
 	public static boolean cecil = false;
 	public static boolean canFindCecil = false;
 	
-	public static Player run(Player player1){
+	public Player run(Player player1){
 		int choice = 0;
 		while(choice<=0 || choice >= 5){
 			choice = Integer.parseInt(JOptionPane.showInputDialog("Welcome to the docks! What would you like to do?\n1. " + foundCecil() +"\n2. Fish\n3. Go to the ocean\n4. Go to the trail" ));

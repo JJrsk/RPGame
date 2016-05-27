@@ -10,9 +10,9 @@ import javax.swing.*;
 public class GameFrame extends JFrame{
 
 
-    public GameFrame(Map m){
+    public GameFrame(Player p, Map m){
 
-        runMap(m.getPlayer(),m);
+        runMap(p,m);
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("We're doing it boys");
@@ -20,7 +20,7 @@ public class GameFrame extends JFrame{
         setVisible(true);
     }
 
-    public void runMap(Player p,final Map m){
+    public void runMap(Player p, final Map m){
         this.setContentPane(m);
         m.createPlayer(p, 128, 64);
 
@@ -30,7 +30,7 @@ public class GameFrame extends JFrame{
                 if(m.keepGoing())
                     m.repaint();
                 else{
-                    m.getExitLocation().run();
+                    m.getExitLocation().run(m.getPlayer());
                     GameFrame.this.setVisible(false);
                     GameFrame.this.dispose();
                 }
@@ -118,7 +118,7 @@ public class GameFrame extends JFrame{
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
-                new GameFrame(new Map0_0());
+                new GameFrame(null,new TrailMap());
             }
         });
     }

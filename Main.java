@@ -19,10 +19,10 @@ public class Main {
 			
 			if(player1.getCurrentLocation() == 1){
 				//pub
-				player1 = Pub.run(player1);
+				player1 = (new Pub()).run(player1);
 			}else if(player1.getCurrentLocation() == 2){
 				//trail
-				player1 = trail.run(player1);
+				player1 = (new Trail()).run(player1);
 			}else if(player1.getCurrentLocation() == 3){
 				//mines
 				//mines.run(player1);
@@ -40,7 +40,7 @@ public class Main {
 				//Alter.run(player1);
 			}else if(player1.getCurrentLocation() == 8){
 				//dock
-				player1 = Dock.run(player1);
+				player1 = (new Dock()).run(player1);
 			}
 		}
 	}

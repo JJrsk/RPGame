@@ -1,13 +1,14 @@
 import javax.swing.JOptionPane;
 
 
-public class trail {
+public class Trail implements Location{
 
-	public static Player run(Player player1) {
+	public Player run(Player player1) {
 	
 		int choice = 0;
-	while(player1.getCurrentLocation() == 2){
-		while (choice<=0 || choice >=4){
+
+	/*while(player1.getCurrentLocation() == 2){
+		while (choice <=0 || choice >= 4){
 			//1 == pub(1/0)
 			//2 == docks (8/7)
 			//3 == mountains (6/5)
@@ -36,7 +37,10 @@ public class trail {
 				choice = 0;
 			}
 		}
-	}
+	}*/
+
+	new GameFrame(player1, (new TrailMap()));
+
 	return(player1);	
 	
 	}
